@@ -1,5 +1,6 @@
 import azure.functions as func
 import logging
+import os
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
@@ -7,19 +8,16 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
+    # Path to the HTML file
+    html_file_path = os.path.join(os.path.dirname(__file__), 'brunoresume.html')
 
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
-    else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
-        )
+    try:
+        # Read the HTML file
+        with open(html_file_path, 'r') as file:
+            html_content = file.read()
+        
+        # Return the HTML content as the response
+        return func.HttpResponse(html_content, mimetype='text/html', status_code=200)
+    except Exception as e:
+        logging.error(f"Error reading HTML file: {e}")
+        return func.HttpResponse("Error reading HTML file.", status_code=500)
