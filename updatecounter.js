@@ -1,4 +1,4 @@
-const API_URL = "https://api.example.com/visitors";
+const API_URL = "AccountEndpoint=https://bruno-ispdata.documents.azure.com:443/;AccountKey=Q5tIDXHfEHUxV6xxSy6v7GJrsE7OSKt5QTxxiTW4ywetb161zzfxHcWowmoWoEa0Wx8jWGVB9UQQACDbeEocKw==;";
 
 async function updateVisitorCounter() {
     try {
