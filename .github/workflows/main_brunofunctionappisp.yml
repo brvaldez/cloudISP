@@ -67,9 +67,9 @@ jobs:
         uses: Azure/functions-action@v1
         id: deploy-to-function
         with:
-          app-name: 'BrunoFunctionAppISP'
-          slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F8D8C1A7B52449D92AC6DF816D5A0FA }}
-          sku: 'flexconsumption'
+    app-name: 'BrunoFunctionAppISP'
+    slot-name: 'Production'
+    package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+    publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F8D8C1A7B52449D92AC6DF816D5A0FA }}
+    sku: 'flexconsumption'
         
