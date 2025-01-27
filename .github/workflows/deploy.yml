@@ -1,0 +1,39 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install Dependencies
+      run: |
+        pip install -r backend/requirements.txt
+
+    - name: Deploy Azure Function
+      uses: azure/functions-action@v1
+      with:
+        app-name: <BrunoFunctionAppISP>
+        package: backend
+
+    - name: Deploy Frontend to Azure Storage
+      uses: azure/cli@v1
+      with:
+        inlineScript: |
+          az storage blob upload-batch \
+            --account-name <isp2025storage> \
+            --source frontend/ \
+            --destination \$web \
+            --auth-mode key
