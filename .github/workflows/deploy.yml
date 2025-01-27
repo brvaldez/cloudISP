@@ -20,7 +20,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        pip install -r backend/requirements.txt
+        pip install -r api/requirements.txt
 
     - name: Deploy Azure Function
       uses: azure/functions-action@v1
