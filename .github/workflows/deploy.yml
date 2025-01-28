@@ -20,13 +20,13 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        pip install -r /backend/api/requirements.txt
+        pip install -r api/requirements.txt
 
     - name: Deploy Azure Function
       uses: azure/functions-action@v1
       with:
         app-name: <BrunoFunctionAppISP>
-        package: backend
+        package: api
 
     - name: Deploy Frontend to Azure Storage
       uses: azure/cli@v1
